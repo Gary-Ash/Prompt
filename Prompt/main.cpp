@@ -16,7 +16,7 @@
 #include "Prompt.h"
 
 std::vector<segmentOptions> segments;
-const char*					shell = std::getenv("SHELL");
+bool						isZsh = (strstr(std::getenv("SHELL"), "zsh") != NULL) ? true : false;
 
 int main(int argc, const char* argv[])
 {
@@ -41,7 +41,7 @@ int main(int argc, const char* argv[])
 	}
 
 	prompt.append(makeEnd(rendered.backgroundColor));
-	if (strstr(shell, "zsh")) {
+	if (isZsh) {
 		prompt.append("\%{\033[0;m \%}");
 		prompt.insert(0, "\%{\033[1;m\%}");
 	} else {
@@ -67,7 +67,7 @@ std::string makeEnd(std::string& backgroundColor)
 	retColor.append(";49;");
 	retColor.append("m");
 
-	if (strstr(shell, "zsh")) {
+	if (isZsh) {
 		retColor.append("\%}");
 		retColor.insert(0, "\%{");
 	}
@@ -95,7 +95,7 @@ std::string makeColor(std::string& foregroundColor, std::string& backgroundColor
 	retColor.append(backgroundColor);
 	retColor.append("m");
 
-	if (strstr(shell, "zsh")) {
+	if (isZsh) {
 		retColor.append("\%}");
 		retColor.insert(0, "\%{");
 	}
