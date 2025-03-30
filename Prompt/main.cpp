@@ -63,9 +63,7 @@ std::string makeEnd(std::string& backgroundColor)
 		retColor.append("5;");
 	}
 	retColor.append(backgroundColor);
-
-	retColor.append(";49;");
-	retColor.append("m");
+	retColor.append(";49m");
 
 	if (isZsh) {
 		retColor.append("\%}");
