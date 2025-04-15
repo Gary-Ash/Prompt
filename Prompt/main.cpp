@@ -18,8 +18,7 @@
 std::vector<segmentOptions> segments;
 bool						isZsh = (strstr(std::getenv("SHELL"), "zsh") != NULL) ? true : false;
 
-int main(int argc, const char* argv[])
-{
+int main(int argc, const char* argv[]){
 	size_t			index = 0;
 	renderSegment	last;
 	renderSegment	rendered;
@@ -32,6 +31,7 @@ int main(int argc, const char* argv[])
 		segments[index].actionFunction(segments[index], rendered, argc, argv);
 		if (!rendered.text.empty()) {
 			if (!prompt.empty()) {
+				prompt.append(" ");
 				prompt.append(makeColor(last.backgroundColor, rendered.backgroundColor));
 				prompt.append("");
 			}
@@ -52,8 +52,7 @@ int main(int argc, const char* argv[])
 	return 0;
 }
 
-std::string makeEnd(std::string& backgroundColor)
-{
+std::string makeEnd(std::string& backgroundColor){
 	std::string retColor = "\033";
 
 	retColor.append("[38;");
@@ -72,8 +71,7 @@ std::string makeEnd(std::string& backgroundColor)
 	return retColor;
 }
 
-std::string makeColor(std::string& foregroundColor, std::string& backgroundColor)
-{
+std::string makeColor(std::string& foregroundColor, std::string& backgroundColor){
 	std::string retColor = "\033";
 
 	retColor.append("[38;");
@@ -100,8 +98,7 @@ std::string makeColor(std::string& foregroundColor, std::string& backgroundColor
 	return retColor;
 }
 
-void appendSpaceAsNeeded(std::string& str)
-{
+void appendSpaceAsNeeded(std::string& str){
 	size_t len = str.length();
 
 	if (len > 0 && !isspace(str[len - 1])) {
