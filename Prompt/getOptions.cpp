@@ -23,8 +23,7 @@ static std::map<std::string, segmentFunction> supportedSegments = {
 	{ "user",	 segmentUser	},
 };
 
-static void getEnvironmentVariables(char *options)
-{
+static void getEnvironmentVariables(char *options) {
 	bool		trueColor	= false;
 	const char* colorTerm	= std::getenv("COLORTERM");
 
@@ -45,14 +44,14 @@ static void getEnvironmentVariables(char *options)
 		const char* env = std::getenv("SNAZZY_PROMPT");
 		if (env == NULL) {
 			strcpy(options, "user,255,39,255,1:machine,255,219:cwd,255,45,255,166:git,255,35,255,200:err,255,166");
-		}else {
+			strcpy(options, "cwd,255,166,255,196:git,255,200,255,35:err,255,1");
+		} else {
 			strcpy(options, env);
 		}
 	}
 }
 
-bool getOptions()
-{
+bool getOptions() {
 	char			options[ARG_MAX];
 	segmentOptions	theSegmentOptions;
 

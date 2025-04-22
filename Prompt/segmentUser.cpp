@@ -16,8 +16,7 @@
 #include <unistd.h>
 #include "Prompt.h"
 
-void segmentUser(segmentOptions& options, renderSegment& rendered, int argc, const char** argv)
-{
+void segmentUser(segmentOptions& options, renderSegment& rendered, int argc, const char** argv) {
 	rendered.foregroundColor	= options.foregroundColor;
 	rendered.backgroundColor	= options.backgroundColor;
 	rendered.text				= getlogin();

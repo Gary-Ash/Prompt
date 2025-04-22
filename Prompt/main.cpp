@@ -18,7 +18,7 @@
 std::vector<segmentOptions> segments;
 bool						isZsh = (strstr(std::getenv("SHELL"), "zsh") != NULL) ? true : false;
 
-int main(int argc, const char* argv[]){
+int main(int argc, const char* argv[]) {
 	size_t			index = 0;
 	renderSegment	last;
 	renderSegment	rendered;
@@ -26,8 +26,6 @@ int main(int argc, const char* argv[]){
 
 	getOptions();
 	for (index = 0; index < segments.size(); ++index) {
-		last = rendered;
-		rendered.text.clear();
 		segments[index].actionFunction(segments[index], rendered, argc, argv);
 		if (!rendered.text.empty()) {
 			if (!prompt.empty()) {
@@ -37,22 +35,27 @@ int main(int argc, const char* argv[]){
 			}
 			prompt.append(makeColor(rendered.foregroundColor, rendered.backgroundColor));
 			prompt.append(rendered.text);
+
+			last = rendered;
+			rendered.text.clear();
+			rendered.backgroundColor.clear();
+			rendered.foregroundColor.clear();
 		}
 	}
 
-	prompt.append(makeEnd(rendered.backgroundColor));
+	prompt.append(makeEnd(last.backgroundColor));
 	if (isZsh) {
-		prompt.append("\%{\033[0;m \%}");
-		prompt.insert(0, "\%{\033[1;m\%}");
+		prompt.append("\%{\033[0m \%}");
+		prompt.insert(0, "\%{\033[1m\%}");
 	} else {
-		prompt.append("\033[0;m ");
-		prompt.insert(0, "\033[1;m");
+		prompt.append("\033[0m ");
+		prompt.insert(0, "\033[1m");
 	}
 	printf("%s", prompt.c_str());
 	return 0;
 }
 
-std::string makeEnd(std::string& backgroundColor){
+std::string makeEnd(std::string& backgroundColor) {
 	std::string retColor = "\033";
 
 	retColor.append("[38;");
@@ -62,7 +65,7 @@ std::string makeEnd(std::string& backgroundColor){
 		retColor.append("5;");
 	}
 	retColor.append(backgroundColor);
-	retColor.append(";49m");
+	retColor.append("m\033[49m");
 
 	if (isZsh) {
 		retColor.append("\%}");
@@ -71,7 +74,7 @@ std::string makeEnd(std::string& backgroundColor){
 	return retColor;
 }
 
-std::string makeColor(std::string& foregroundColor, std::string& backgroundColor){
+std::string makeColor(std::string& foregroundColor, std::string& backgroundColor) {
 	std::string retColor = "\033";
 
 	retColor.append("[38;");
@@ -98,7 +101,7 @@ std::string makeColor(std::string& foregroundColor, std::string& backgroundColor
 	return retColor;
 }
 
-void appendSpaceAsNeeded(std::string& str){
+void appendSpaceAsNeeded(std::string& str) {
 	size_t len = str.length();
 
 	if (len > 0 && !isspace(str[len - 1])) {

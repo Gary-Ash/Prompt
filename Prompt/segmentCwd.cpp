@@ -18,7 +18,7 @@
 
 #include "Prompt.h"
 
-void segmentCwd(segmentOptions& options, renderSegment& rendered, int argc, const char** argv){
+void segmentCwd(segmentOptions& options, renderSegment& rendered, int argc, const char** argv) {
 	struct knownDir { std::string symbol; std::string directory; };
 
 	char			dir[PATH_MAX];
@@ -76,7 +76,7 @@ void segmentCwd(segmentOptions& options, renderSegment& rendered, int argc, cons
 	rendered.text.append(p);
 
 	if (*p == '\0') {
-		rendered.text.append("  ");
+		rendered.text.append(" ");
 	}
 }
 
