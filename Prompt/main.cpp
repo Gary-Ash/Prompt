@@ -45,10 +45,8 @@ int main(int argc, const char* argv[]) {
 
 	prompt.append(makeEnd(last.backgroundColor));
 	if (isZsh) {
-		prompt.append("\%{\033[0m \%}");
 		prompt.insert(0, "\%{\033[1m\%}");
 	} else {
-		prompt.append("\033[0m ");
 		prompt.insert(0, "\033[1m");
 	}
 	printf("%s", prompt.c_str());
@@ -56,21 +54,40 @@ int main(int argc, const char* argv[]) {
 }
 
 std::string makeEnd(std::string& backgroundColor) {
-	std::string retColor = "\033";
-
-	retColor.append("[38;");
-	if (backgroundColor.length() > 3) {
-		retColor.append("2;");
-	} else {
-		retColor.append("5;");
-	}
-	retColor.append(backgroundColor);
-	retColor.append("m\033[49m");
+	std::string retColor	= "\033[0m";
+	std::string bcolor		= "\033[38;";
+	std::string resetFColor = "\033[39m";
+	std::string resetBColor = "\033[49m";
 
 	if (isZsh) {
-		retColor.append("\%}");
 		retColor.insert(0, "\%{");
+		retColor.append("\%}");
+
+		resetFColor.insert(0, "\%{");
+		resetFColor.append("\%}");
+
+		resetBColor.insert(0, "\%{");
+		resetBColor.append("\%} ");
 	}
+
+	if (backgroundColor.length() > 3) {
+		bcolor.append("2;");
+	} else {
+		bcolor.append("5;");
+	}
+	bcolor.append(backgroundColor);
+	bcolor.append("m");
+
+	if (isZsh) {
+		bcolor.insert(0, "\%{");
+		bcolor.append("\%}");
+	}
+
+	retColor.append(bcolor);
+	retColor.append("");
+	retColor.append(resetFColor);
+	retColor.append(resetBColor);
+
 	return retColor;
 }
 
