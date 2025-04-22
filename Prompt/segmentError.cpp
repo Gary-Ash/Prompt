@@ -48,8 +48,7 @@ std::map<int, const char*> errors = {
 	{ 105, "EOWNERDEAD"	   }, { 106, "EQFULL"		},
 };
 
-void segmentError(segmentOptions& options, renderSegment& rendered, int argc, const char** argv)
-{
+void segmentError(segmentOptions& options, renderSegment& rendered, int argc, const char** argv) {
 	for (int index = 0; index < argc; ++index) {
 		if (strcmp(argv[index], "--error") == 0) {
 			++index;

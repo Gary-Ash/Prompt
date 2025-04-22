@@ -35,8 +35,7 @@ static size_t		untracked	= 0;
 static size_t		stashed		= 0;
 
 
-void segmentGit(segmentOptions& options, renderSegment& rendered, int argc, const char** argv)
-{
+void segmentGit(segmentOptions& options, renderSegment& rendered, int argc, const char** argv) {
 	char			dir[PATH_MAX];
 	git_repository* repo = NULL;
 
@@ -130,8 +129,7 @@ void segmentGit(segmentOptions& options, renderSegment& rendered, int argc, cons
 	git_libgit2_shutdown();
 }
 
-static void gatherRemoteStats(git_repository* repo, git_reference* head, git_strarray* remotes)
-{
+static void gatherRemoteStats(git_repository* repo, git_reference* head, git_strarray* remotes) {
 	git_remote*		remote		= NULL;
 	const git_oid*	localCommit = git_reference_target(head);
 	int				error		= git_remote_lookup(&remote, repo, remotes->strings [0]);
@@ -196,8 +194,7 @@ static void gatherRemoteStats(git_repository* repo, git_reference* head, git_str
 	}
 }
 
-static void gatherLocalStats(git_repository*  repo)
-{
+static void gatherLocalStats(git_repository*  repo) {
 	git_status_list*	status;
 	git_status_options	statusopt = GIT_STATUS_OPTIONS_INIT;
 
@@ -228,14 +225,12 @@ static void gatherLocalStats(git_repository*  repo)
 	git_status_list_free(status);
 }
 
-static int stashcb(size_t index, const char* message, const git_oid* stashID, void* payload)
-{
+static int stashcb(size_t index, const char* message, const git_oid* stashID, void* payload) {
 	++stashed;
 	return 0;
 }
 
-static int cred_acquire_cb(git_credential** out, const char* url, const char* username_from_url, unsigned int allowed_types, void* payload)
-{
+static int cred_acquire_cb(git_credential** out, const char* url, const char* username_from_url, unsigned int allowed_types, void* payload) {
 	uid_t			uid			= geteuid();
 	struct passwd*	pw			= getpwuid(uid);
 	const char*		username	= (username_from_url != NULL ? username_from_url  : pw->pw_name);

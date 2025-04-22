@@ -16,8 +16,7 @@
 #include <unistd.h>
 #include "Prompt.h"
 
-void segmentMachine(segmentOptions& options, renderSegment& rendered, int argc, const char** argv)
-{
+void segmentMachine(segmentOptions& options, renderSegment& rendered, int argc, const char** argv) {
 	char host[_POSIX_HOST_NAME_MAX];
 
 	rendered.foregroundColor	= options.foregroundColor;
