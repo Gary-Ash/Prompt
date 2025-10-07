@@ -53,6 +53,7 @@ void segmentError(segmentOptions& options, renderSegment& rendered, int argc, co
 void segmentGit(segmentOptions& options, renderSegment& rendered, int argc, const char** argv);
 void segmentMachine(segmentOptions& options, renderSegment& rendered, int argc, const char** argv);
 void segmentUser(segmentOptions& options, renderSegment& rendered, int argc, const char** argv);
+void segmentShortError(segmentOptions& options, renderSegment& rendered, int argc, const char** argv);
 
 
 extern std::vector<segmentOptions> segments;

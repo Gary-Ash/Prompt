@@ -16,11 +16,12 @@
 #include "Prompt.h"
 
 static std::map<std::string, segmentFunction> supportedSegments = {
-	{ "cwd",	 segmentCwd		},
-	{ "err",	 segmentError	},
-	{ "git",	 segmentGit		},
-	{ "machine", segmentMachine },
-	{ "user",	 segmentUser	},
+	{ "cwd",	 segmentCwd		   },
+	{ "err",	 segmentError	   },
+	{ "git",	 segmentGit		   },
+	{ "machine", segmentMachine	   },
+	{ "short",	 segmentShortError },
+	{ "user",	 segmentUser	   },
 };
 
 static void getEnvironmentVariables(char *options) {
@@ -36,15 +37,15 @@ static void getEnvironmentVariables(char *options) {
 	if (trueColor == true) {
 		const char* env = std::getenv("SNAZZY_PROMPT_TRUE");
 		if (env == NULL) {
-			strcpy(options, "user,255;255;255,106;168;214;255;255;255,106;168;214:machine,255;255;255,180;167;214:cwd,255;255;255,255;148;0,255;255;255,1:git,255;255;255,147;196;124,255;255;255,255;142;198:err,255;255;255,128;0;0");
+			strcpy(options, "user,255;255;255,106;168;214;255;255;255,106;168;214:machine,255;255;255,180;167;214:cwd,255;255;255,255;148;0,255;255;255,1:git,255;255;255,147;196;124,255;255;255,255;142;198:short,255;255;255,128;0;0");
 		} else {
 			strcpy(options, env);
 		}
 	} else {
 		const char* env = std::getenv("SNAZZY_PROMPT");
 		if (env == NULL) {
-			strcpy(options, "user,255,39,255,1:machine,255,219:cwd,255,45,255,166:git,255,35,255,200:err,255,166");
-			strcpy(options, "cwd,255,166,255,196:git,255,200,255,35:err,255,1");
+			strcpy(options, "user,255,39,255,1:machine,255,219:cwd,255,45,255,166:git,255,35,255,200:short,255,166");
+			strcpy(options, "cwd,255,166,255,196:git,255,200,255,35:short,255,1");
 		} else {
 			strcpy(options, env);
 		}

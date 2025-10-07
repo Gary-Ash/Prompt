@@ -29,13 +29,15 @@ int main(int argc, const char* argv[]) {
 		segments[index].actionFunction(segments[index], rendered, argc, argv);
 		if (!rendered.text.empty()) {
 			if (!prompt.empty()) {
-				prompt.append(" ");
 				prompt.append(makeColor(last.backgroundColor, rendered.backgroundColor));
-				prompt.append("");
+				if (rendered.text != " ") {
+					prompt.append("");
+				}
 			}
 			prompt.append(makeColor(rendered.foregroundColor, rendered.backgroundColor));
-			prompt.append(rendered.text);
-
+			if (rendered.text != " ") {
+				prompt.append(rendered.text);
+			}
 			last = rendered;
 			rendered.text.clear();
 			rendered.backgroundColor.clear();
