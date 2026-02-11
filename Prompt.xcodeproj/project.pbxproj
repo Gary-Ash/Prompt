@@ -298,7 +298,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libgit2/build",
-					"/opt/homebrew/Cellar/openssl@3/3.4.1/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -315,7 +314,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libgit2/build",
-					"/opt/homebrew/Cellar/openssl@3/3.4.1/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				ONLY_ACTIVE_ARCH = YES;

@@ -1,5 +1,6 @@
 # Build output
-prompt
+/prompt
+!/Prompt/
 *.o
 *.dSYM/
 
